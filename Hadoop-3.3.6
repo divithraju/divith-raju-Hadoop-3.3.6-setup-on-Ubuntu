@@ -1,0 +1,75 @@
+Welcome to the Hadoop-3.3.6-setup-on-Ubuntu wiki!
+
+https://www.linkedin.com/in/divithraju/
+
+Hadoop-3.3.6 Single Node Cluster Creation Installation
+————————————————————————————————-
+: INSTRUCTIONS :
+
+[ You can change /home/divithraju/Downloads/path/ use your path location on your machine ]
+1. Download Hadoop and Java
+tar -zxvf hadoop-3.3.6.tar.gz (Extract the tar file)
+tar -zxvf jdk-8u391-linux-x64.tar (Extract the tar file)
+
+sudo apt-get install vim (Install USER Friendly Editer)
+
+vi .bashrc (Set the java Path in your Home Path)
+export JAVA_HOME=/home/divithraju/Downloads/jdk-8u391-linux-x64/jdk1.8.0_391
+export PATH=HOME/bin:JAVA_HOME/bin:PATH
+
+source .bashrc (Execute the bashrc file) echo JAVA_HOME (Check the java path
+=============================
+
+2. Modify Hadoop Configuration Files
+NAMENODE -→ core-site.xml
+RESOURCE MANGER -→ mapperd-site.xml
+SECONDARYNAMENODE -→
+DATANODE -→ slaves
+NODEMANGER -→ slaves & yarn-site.xml
+
+[ You can change /home/divithraju/Downloads/path/ use your path location on your machine ]
+[ And don’t change any orther shell ]
+=============================
+
+vi etc/hadoop/slaves
+localhost
+
+Install the ssh key
+(Generates, Manages and Converts Authentication keys)
+sudo apt-get install openssh-server
+ssh-keygen -t rsa
+(Setup passwordless ssh to localhost and to slaves )
+cd .ssh
+ls
+cat id_rsa.pub >> authorized_keys (copy the .pub)
+(Copy the id_rsa.pub from NameNode to authorized_keys in all machines)
+ssh localhost
+(Asking No Password )
+
+=============================
+
+3. Format NameNode
+cd hadoop-3.3.6
+bin/hadoop namenode -format (Your Hadoop File System Ready)
+
+=============================
+
+4. Start All Hadoop Related Services
+sbin/start-all.sh
+(Starting Daemon’s For DFS & YARN)
+NameNode
+DataNode
+SecondaryNameNode
+ResourceManager
+NodeManager
+
+(check the Browser Web GUI )
+NameNode – http://localhost:9870
+Resource Manager – http://localhost:8088
+
+=============================
+
+5.Stop All Hadoop and Yarn Related Services
+sbin/stop-all.sh
+
+  
